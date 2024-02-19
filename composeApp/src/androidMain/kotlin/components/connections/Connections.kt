@@ -1,9 +1,10 @@
-package components.createEvent
+package components.connections
+
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun CreateEvent() {
-    Text("This is Create Event Screen")
+fun Connections() {
+    Text("This is Connections Screen")
 }

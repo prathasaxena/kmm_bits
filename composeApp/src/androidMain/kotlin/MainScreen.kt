@@ -1,30 +1,48 @@
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import components.common.stringResource
+import components.auth.AuthenticationViewModel
+import components.navigation.NavigationViewModel
+import components.navigation.ui.TopAppBarTitle
+import components.navigation.ui.BottomTabBarNavigation
+import components.navigation.ui.Navigations
+import org.pratha.bits.MR
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavHostController) {
+    val navigationViewModel = NavigationViewModel()
+    val authenticationViewModel = AuthenticationViewModel()
     Scaffold(
+        topBar = {
+                 TopAppBar(title = {
+                     TopAppBarTitle(navigationViewModel = navigationViewModel)
+                 })
+        },
         bottomBar = {
             BottomAppBar {
-                BottomTabBarNavigation(navController)
+                BottomTabBarNavigation(navController,
+                    navigationViewModel = navigationViewModel,
+                    authViewModel = authenticationViewModel
+                )
             }
-        }
+        },
+        containerColor = Color(MR.colors.screenBackgroundColor.getColor(LocalContext.current))
+
     ) { innerPadding ->
-        Box(modifier = Modifier.padding(
+        Box(
+            modifier = Modifier.padding(
             top = innerPadding.calculateTopPadding(),
             bottom = innerPadding.calculateBottomPadding()
         )) {
@@ -33,29 +51,3 @@ fun MainScreen(navController: NavHostController) {
     }
 }
 
-@Composable
-fun BottomTabBarNavigation(navController: NavHostController) {
-    BottomNavigation {
-        val navCurrentEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navCurrentEntry?.destination?.route
-        val listOfBottomNavigator = listOf(
-            NavigationItem.CreateEvent,
-            NavigationItem.Event,
-            NavigationItem.Messages,
-            NavigationItem.Profile
-        )
-        listOfBottomNavigator.forEach {
-            BottomNavigationItem(
-                selected = currentRoute == it.route,
-                onClick = {
-                    navController.navigate(it.route) {
-                        popUpTo(navController.graph.startDestinationId)
-                        launchSingleTop = true
-                    }
-                },
-                icon = { it.icon?.let { it1 -> Icon(it1, contentDescription = null) } } ,
-                label = { it.title?.let { it1 -> Text(stringResource(id = it1)) } }
-            )
-        }
-    }
-}

@@ -2,6 +2,7 @@
 <resources>
     <string name="bottom_tab_events">Events</string>
     <string name="bottom_tab_create_events">Create</string>
+    <string name="bottom_tab_connections">Connections</string>
     <string name="bottom_tab_create_messages">Messages</string>
     <string name="bottom_tab_create_profile">Profile</string>
     <string name="example_string_with_args">Profile %s</string>

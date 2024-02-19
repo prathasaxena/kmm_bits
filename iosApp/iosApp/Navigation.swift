@@ -12,9 +12,15 @@ import Shared
 
 
 struct Navigation : View {
+    
+    init() {
+        UITabBar.appearance().backgroundColor =  MR.colors().themedBottomTab.getUIColor()
+    }
+    
     var body: some View {
         TabView {
-            CreateEvent().tabItem {
+            CreateEvent()
+                .tabItem {
                 Label(
                     Strings().get(id: MR.strings().bottom_tab_create_events, args: [])
                     , systemImage: "pencil.circle")
