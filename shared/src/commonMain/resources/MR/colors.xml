@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="lightBackground">#F5F5F5</color>
+    <color name="darkBackground">#37474F</color>
+    <color name="primaryBlue">#29B6F6</color>
+    <color name="warning">#37474F</color>
+    <color name="themedBottomTab">
+        <light>#E0E0E0</light>
+        <dark>#B0BEC5</dark>
+    </color>
+    <color name="screenBackgroundColor">
+        <light>@color/lightBackground</light>
+        <dark>@color/darkBackground</dark>
+    </color>
+    <color name="textColor">
+        <light>@color/darkBackground</light>
+        <dark>@color/lightBackground</dark>
+    </color>
+
+</resources>
