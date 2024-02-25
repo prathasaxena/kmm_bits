@@ -1,5 +1,5 @@
 import SwiftUI
-import Shared
+import MultiPlatformLibrary
 
 @main
 struct iOSApp: App {

@@ -7,15 +7,18 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
-import components.auth.AuthenticationViewModel
+import org.koin.androidx.compose.koinViewModel
 import components.navigation.NavigationViewModel
 import components.navigation.ui.TopAppBarTitle
 import components.navigation.ui.BottomTabBarNavigation
 import components.navigation.ui.Navigations
+import data.viewModel.AuthViewModel
+import org.koin.androidx.compose.viewModel
 import org.pratha.bits.MR
 
 
@@ -23,7 +26,8 @@ import org.pratha.bits.MR
 @Composable
 fun MainScreen(navController: NavHostController) {
     val navigationViewModel = NavigationViewModel()
-    val authenticationViewModel = AuthenticationViewModel()
+    val authViewModel = AuthViewModel()
+    println("erewrwerewr ${authViewModel.isLoggedIn.collectAsState()}")
     Scaffold(
         topBar = {
                  TopAppBar(title = {
@@ -34,7 +38,7 @@ fun MainScreen(navController: NavHostController) {
             BottomAppBar {
                 BottomTabBarNavigation(navController,
                     navigationViewModel = navigationViewModel,
-                    authViewModel = authenticationViewModel
+                    authViewModel = authViewModel
                 )
             }
         },

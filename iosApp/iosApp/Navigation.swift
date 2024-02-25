@@ -8,13 +8,15 @@
 
 import Foundation
 import SwiftUI
-import Shared
+import MultiPlatformLibrary
+import mokoMvvmFlowSwiftUI
+
 
 
 struct Navigation : View {
-    
+    @ObservedObject var viewModel: AuthViewModel = AuthViewModel()
     init() {
-        UITabBar.appearance().backgroundColor =  MR.colors().themedBottomTab.getUIColor()
+//        UITabBar.appearance().backgroundColor =  MR.colors().themedBottomTab.getUIColor()
     }
     
     var body: some View {
@@ -24,6 +26,12 @@ struct Navigation : View {
                 Label(
                     Strings().get(id: MR.strings().bottom_tab_create_events, args: [])
                     , systemImage: "pencil.circle")
+            }
+            Connections()
+                .tabItem {
+                Label(
+                    Strings().get(id: MR.strings().bottom_tab_connections, args: [])
+                    , systemImage: "magnifyingglass")
             }
             Events().tabItem {
                 Label(Strings().get(id: MR.strings().bottom_tab_events, args: []),

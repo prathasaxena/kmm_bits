@@ -5,6 +5,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -15,6 +16,9 @@ import components.auth.AuthenticationViewModel
 import components.common.stringResource
 import components.navigation.NavigationActions
 import components.navigation.NavigationViewModel
+import data.viewModel.AuthViewModel
+import di.getViewModelByPlatform
+import org.koin.androidx.compose.getViewModel
 import org.pratha.bits.MR
 
 @Composable
@@ -22,8 +26,10 @@ fun BottomTabBarNavigation(
     navController: NavHostController,
     // add KOIN
     navigationViewModel: NavigationViewModel = NavigationViewModel(),
-    authViewModel : AuthenticationViewModel = AuthenticationViewModel()
+    authViewModel : AuthViewModel
    ) {
+    val loggedIn by authViewModel.isLoggedIn.collectAsState()
+
     NavigationBar(
         containerColor =  Color(MR.colors.themedBottomTab.getColor(LocalContext.current)),
         contentColor = Color(MR.colors.textColor.getColor(LocalContext.current)),
@@ -39,7 +45,7 @@ fun BottomTabBarNavigation(
             NavigationItem.Profile
         )
 
-        if (authViewModel.authenticationState.isOrganiser) {
+        if (loggedIn) {
             listOfBottomNavigator.removeAt(2)
         } else {
             listOfBottomNavigator.removeAt(0)

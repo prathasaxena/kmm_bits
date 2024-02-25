@@ -2,10 +2,11 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    id("dev.icerock.mobile.multiplatform-resources")
+    id(libs.plugins.mokoSharedResources.get().pluginId)
 }
 
 kotlin {
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -13,7 +14,22 @@ kotlin {
             }
         }
     }
-    
+//    cocoapods {
+//        version = "1.0"
+//        summary = "Some description for the Shared Module"
+//        homepage = "Link to the Shared Module homepage"
+//        ios.deploymentTarget = "17.0"
+//    }
+
+    targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java).all {
+        binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.Framework::class.java).all {
+            baseName = "MultiPlatformLibrary"
+            export(libs.moko.mvvm.core)
+            export(libs.moko.mvvm.flow)
+        }
+    }
+
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -26,14 +42,29 @@ kotlin {
             export("dev.icerock.moko:graphics:0.9.0")
         }
     }
-    
+
+//    iosX64()
+//    iosArm64()
+//    iosSimulatorArm64()
+
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
             api("dev.icerock.moko:resources:0.23.0")
+            // moko mvvm
+            api(libs.moko.mvvm.core)
+            api(libs.moko.mvvm.livedata)
+            api(libs.moko.mvvm.livedata.resources)
+            api(libs.moko.mvvm.state)
+            api(libs.moko.mvvm.flow)
+            api(libs.moko.mvvm.flow.resources)
+            implementation(libs.koin.core)
         }
         androidMain {
             dependsOn(commonMain.get())
+            dependencies {
+                implementation(libs.koin.android)
+            }
         }
 
         val iosX64Main by getting

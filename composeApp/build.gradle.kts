@@ -32,6 +32,8 @@ kotlin {
             implementation(projects.shared)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
         }
     }
 

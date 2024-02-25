@@ -50,4 +50,9 @@ Add dependencies in shared build.gradle.kts
 - for localised language shared/commonMain/resources/MR/{country_code}/string.xml
 - Strings.kt under commonMain/kotlin, define the expect class
 - Actual classes under androidMain & iosMain
+* 
+* ADD MOKO mvvm
+
+- in build.gradle of common folder, under plugins add
+  kotlin("native.cocoapods")
 
