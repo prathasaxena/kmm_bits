@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     id("dev.icerock.mobile.multiplatform-resources")
+    id("co.touchlab.skie") version "0.6.2"
 }
 
 kotlin {
@@ -30,10 +31,14 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
-            api("dev.icerock.moko:resources:0.23.0")
+            api(libs.resources)
+            implementation(libs.kotlinx.coroutines.core)
         }
         androidMain {
             dependsOn(commonMain.get())
+            dependencies {
+                implementation(libs.androidx.lifecycle.viewmodel.ktx)
+            }
         }
 
         val iosX64Main by getting

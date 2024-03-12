@@ -11,19 +11,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
-import components.auth.AuthenticationViewModel
 import components.navigation.NavigationViewModel
 import components.navigation.ui.TopAppBarTitle
 import components.navigation.ui.BottomTabBarNavigation
 import components.navigation.ui.Navigations
 import org.pratha.bits.MR
+import viewModels.login.LoginViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavHostController) {
     val navigationViewModel = NavigationViewModel()
-    val authenticationViewModel = AuthenticationViewModel()
+    val authenticationViewModel = LoginViewModel()
     Scaffold(
         topBar = {
                  TopAppBar(title = {

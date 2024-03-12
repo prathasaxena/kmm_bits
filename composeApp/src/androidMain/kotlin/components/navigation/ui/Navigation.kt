@@ -1,19 +1,18 @@
 package components.navigation.ui
 
 
-import Events
+import EventsList
 import Messages
 import Profile
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.Call
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,6 +20,7 @@ import components.connections.Connections
 import components.createEvent.CreateEvent
 import dev.icerock.moko.resources.StringResource
 import org.pratha.bits.MR
+import viewModels.events.EventViewModel
 
 
 sealed class NavigationItem(var route: String, var icon: ImageVector?, var title: StringResource) {
@@ -36,12 +36,13 @@ sealed class NavigationItem(var route: String, var icon: ImageVector?, var title
 
 @Composable
 fun Navigations(navController: NavHostController) {
+    val eventViewModel = EventViewModel()
     NavHost(navController = navController, startDestination = NavigationItem.Event.route ) {
         composable(NavigationItem.CreateEvent.route) {
             CreateEvent()
         }
         composable(NavigationItem.Event.route) {
-            Events()
+            EventsList(eventViewModel)
         }
         composable(NavigationItem.Connections.route) {
             Connections()

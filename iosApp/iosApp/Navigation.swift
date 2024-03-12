@@ -25,7 +25,7 @@ struct Navigation : View {
                     Strings().get(id: MR.strings().bottom_tab_create_events, args: [])
                     , systemImage: "pencil.circle")
             }
-            Events().tabItem {
+            Events(viewModel: .init()).tabItem {
                 Label(Strings().get(id: MR.strings().bottom_tab_events, args: []),
                       systemImage: "calendar.circle")
             }

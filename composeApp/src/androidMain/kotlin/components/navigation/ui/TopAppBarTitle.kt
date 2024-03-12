@@ -45,10 +45,6 @@ fun TopAppBarTitle(
         verticalAlignment = Alignment.CenterVertically,
 
     ) {
-//        Text(
-//            style = textStyle,
-//            color = Color(MR.colors.primaryBlue.getColor(currentContext)),
-//            text = "Login")
         leftContent()
         Text(text = stringResource(id = navigationViewModel.navigationState.topBarTitle),
             style = textStyle,
@@ -57,22 +53,6 @@ fun TopAppBarTitle(
             )
 
         rightContent()
-//        Button(onClick = { /*TODO*/ },
-//            modifier = modifier
-//                .width(100.dp)
-//                .height(50.dp)
-//        ) {
-//            Column(
-//                horizontalAlignment = Alignment.CenterHorizontally
-//            ) {
-//                Text(text = "Attend",
-//                    style = textStyle,)
-//                Text(text = "4535 Rs",
-//                    style = textStyle,)
-//            }
-//
-//        }
-
     }
 
 }
