@@ -39,6 +39,7 @@ struct Events : View {
             VStack {
                 ForEach(viewModel.eventState.eventList, id: \.self) { events in
                     HStack {
+                        
                         VStack {
                             Text(events.title)
                             VStack {
@@ -56,9 +57,9 @@ struct Events : View {
 }
 
 
-//struct Events_previews : PreviewProvider {
-//    static var previews: some View {
-//        Events()
-//
-//    }
-//}
+struct Events_previews : PreviewProvider {
+    static var previews: some View {
+        Events(viewModel: .init())
+
+    }
+}
