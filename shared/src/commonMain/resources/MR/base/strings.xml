@@ -6,4 +6,5 @@
     <string name="bottom_tab_create_messages">Messages</string>
     <string name="bottom_tab_create_profile">Profile</string>
     <string name="example_string_with_args">Profile %s</string>
+    <string name="login">Log in</string>
 </resources>

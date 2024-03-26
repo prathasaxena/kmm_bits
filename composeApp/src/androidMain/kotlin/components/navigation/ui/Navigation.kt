@@ -12,12 +12,12 @@ import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import components.connections.Connections
 import components.createEvent.CreateEvent
+import components.events.EventDetails
 import dev.icerock.moko.resources.StringResource
 import org.pratha.bits.MR
 import viewModels.events.EventViewModel
@@ -32,12 +32,19 @@ sealed class NavigationItem(var route: String, var icon: ImageVector?, var title
     object Connections : NavigationItem("connections", Icons.Rounded.Search, title = MR.strings.bottom_tab_connections)
     object Messages : NavigationItem("messages", Icons.Rounded.Email, title = MR.strings.bottom_tab_create_messages)
     object Profile: NavigationItem("profile", Icons.Rounded.Person, title = MR.strings.bottom_tab_create_profile)
+
+}
+
+sealed class NavigationView(var route: String) {
+    object EventDetails : NavigationView("eventDetails")
 }
 
 @Composable
 fun Navigations(navController: NavHostController) {
     val eventViewModel = EventViewModel()
-    NavHost(navController = navController, startDestination = NavigationItem.Event.route ) {
+    NavHost(
+        navController = navController,
+        startDestination = NavigationItem.Event.route) {
         composable(NavigationItem.CreateEvent.route) {
             CreateEvent()
         }
@@ -53,6 +60,9 @@ fun Navigations(navController: NavHostController) {
         }
         composable(NavigationItem.Profile.route) {
             Profile()
+        }
+        composable(NavigationView.EventDetails.route) {
+            EventDetails()
         }
     }
 

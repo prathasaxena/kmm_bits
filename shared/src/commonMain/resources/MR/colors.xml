@@ -6,7 +6,7 @@
     <color name="warning">#37474F</color>
     <color name="themedBottomTab">
         <light>#E0E0E0</light>
-        <dark>#B0BEC5</dark>
+        <dark>#151617</dark>
     </color>
     <color name="screenBackgroundColor">
         <light>@color/lightBackground</light>

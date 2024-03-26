@@ -1,11 +1,11 @@
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,28 +24,40 @@ import viewModels.login.LoginViewModel
 fun MainScreen(navController: NavHostController) {
     val navigationViewModel = NavigationViewModel()
     val authenticationViewModel = LoginViewModel()
+    val navigationTabBgColor = Color(MR.colors.themedBottomTab.getColor(LocalContext.current))
+
     Scaffold(
         topBar = {
-                 TopAppBar(title = {
-                     TopAppBarTitle(navigationViewModel = navigationViewModel)
-                 })
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = navigationTabBgColor),
+                title = {
+                    // implement KOIN
+                    TopAppBarTitle(
+                        navigationViewModel = navigationViewModel,
+                        loginViewModel = authenticationViewModel)
+                },
+            )
         },
         bottomBar = {
-            BottomAppBar {
+            BottomAppBar(
+                containerColor = navigationTabBgColor,
+
+            ) {
+                // implement KOIN
                 BottomTabBarNavigation(navController,
                     navigationViewModel = navigationViewModel,
                     authViewModel = authenticationViewModel
                 )
             }
         },
-        containerColor = Color(MR.colors.screenBackgroundColor.getColor(LocalContext.current))
-
+        containerColor = navigationTabBgColor
     ) { innerPadding ->
         Box(
             modifier = Modifier.padding(
             top = innerPadding.calculateTopPadding(),
             bottom = innerPadding.calculateBottomPadding()
-        )) {
+        )
+        ) {
             Navigations(navController)
         }
     }
